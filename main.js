@@ -1,42 +1,35 @@
 'use strict';
 
-function DomElement(selector, height, width, bg, fontSize) {
+let selector1 = prompt('Введите символ: . или #')
+let text1 = prompt('Введите текст')
+
+function DomElement(selector, height, width, bg, fontSize, text) {
   this.selector = selector;
   this.height = height;
   this.width = width;
   this.bg = bg;
   this.fontSize = fontSize;
+  this.text = text;
+
   this.getElem = function () {
-    if (selector[0].value === '.') {
-      let myElem = document.createElement('div');
-      myElem.classList.add('block');
-      console.log(myElem + 'class')
-    } else if (selector[0].value === '#') {
-      let myElem = document.createElement('p');
+    let myElem;
+    if (this.selector[0] === '.') {
+      myElem = document.createElement('div');
+      myElem.setAttribute('class', 'block');
+    } else if (this.selector[0] === '#') {
+      myElem = document.createElement('p');
       myElem.setAttribute('id', 'best');
-      console.log(myElem + 'id')
-    } else {
-      return
     }
 
-    myElem.textContent = 'Не понятно что и где писать';
+    myElem.textContent = text;
 
-    myElem.style.cssText = 'height: height, width: width, background: bg, font-size: fontSize';
-
-    // myElem.style.cssText = 'height: 200px, width: 300px, background: silver, font-size: 14px';
+    myElem.style.cssText = `height: ${this.height}px; width: ${this.width}px; background-color: ${this.bg}; font-size: ${this.fontSize}px;`;
 
     document.body.appendChild(myElem);
   }
 };
 
-DomElement.getElem;
+let block = new DomElement(selector1, 300, 200, 'silver', 18, text1);
 
-let block1 = new DomElement('.block', '600px', '600px', 'blue', '18px');
-let block2 = new DomElement('#best', '800px', '100px', 'red', '12px');
-
-// block.getElem();
-
-console.log(block1.getElem);
-console.log(block2.getElem);
-// console.log(block.getElem('200px', '300px', 'silver', '15px'));
+block.getElem();
 
